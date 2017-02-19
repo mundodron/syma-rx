@@ -40,12 +40,14 @@ Joystick_ Joystick(JOYSTICK_DEFAULT_REPORT_ID,
 bool bind_in_progress = false;
 unsigned long newTime;
 
-void setup() {  
+void setup() {
+#if SERIAL_DEBUG
   Serial1.begin(115200);
   while (!Serial1) 
   {
     ; // wait for serial port to connect. Needed for Leonardo only
   }
+#endif
   // SS pin must be set as output to set SPI to master !
   pinMode(SS, OUTPUT);
 
