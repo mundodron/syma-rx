@@ -45,6 +45,14 @@ void symaxProtocol::init(nrf24l01p *wireless)
     mLastSignalTime = millis();
 }
 
+/**
+ * Get the current state.
+ */
+uint8_t symaxProtocol::getState()
+{
+	return mState;
+}
+
 // loop function, can be factorized (for later)
 uint8_t symaxProtocol::run( rx_values_t *rx_value )
 {
