@@ -56,6 +56,8 @@ public:
   void init(nrf24l01p *wireless);
   uint8_t run(rx_values_t *rx_value );
   uint8_t getState();
+  void reset();
+  void scan();
   
 protected:
   uint8_t checksum(uint8_t *data);
