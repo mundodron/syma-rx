@@ -55,7 +55,7 @@ void nrf24l01p::rxMode()
   writeRegister(EN_RXADDR, 0x01);	// Enable first data pipe
   writeRegister(SETUP_AW, 0x03);	// 5 bytes address
   writeRegister(SETUP_RETR, 0xFF);	// 15 retransmit, 4000us pause
-  writeRegister(RF_CH, 0x00);	// channel 8
+  writeRegister(RF_CH, 0x00);		// channel 8
   setBitrate(NRF24L01_BR_250K);
   setPower(mPower);
   writeRegister(STATUS, 0x70);		// Clear status register
@@ -68,9 +68,20 @@ void nrf24l01p::rxMode()
   writeRegister(CONFIG, _BV(EN_CRC) | _BV(CRCO) | _BV(PWR_UP)  );
   delayMicroseconds(100);
   writeRegister(CONFIG, _BV(EN_CRC) | _BV(CRCO) | _BV(PWR_UP) | _BV(PRIM_RX) );
-  delayMicroseconds(100);
+  delayMicroseconds(130);
   setCeHigh();
   delayMicroseconds(100);
+}
+
+void nrf24l01p::txMode()
+{
+	setCeLow();
+	writeRegister(STATUS, 0x70);	// Clear status register
+	// Swith to TX mode
+	writeRegister(CONFIG, (1 << EN_CRC) | (1 << CRCO) | (1 << PWR_UP));
+	delayMicroseconds(130);
+	setCeHigh();
+	delayMicroseconds(100);
 }
 
 uint8_t nrf24l01p::readRegister(uint8_t reg)
