@@ -96,7 +96,7 @@ public :
   inline void resetRxFlag(){writeRegister(STATUS, _BV(RX_DR));}
   inline bool rxEmpty(){return (readRegister(FIFO_STATUS) & _BV(RX_EMPTY));} 
   uint8_t readPayload(void* buf, uint8_t len);
-  uint8_t rxMode();
+  void rxMode();
   uint8_t flushRx();
   uint8_t flushTx();
   uint8_t setAddress(const uint8_t* buf, uint8_t len);

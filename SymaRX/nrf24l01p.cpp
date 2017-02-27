@@ -46,7 +46,7 @@ void nrf24l01p::init(uint8_t payloadSize)
 }
 
 
-uint8_t nrf24l01p::rxMode()
+void nrf24l01p::rxMode()
 {
   setCeLow();
   writeRegister(CONFIG, _BV(EN_CRC) | _BV(CRCO));	// Enable CRC (2bytes)
